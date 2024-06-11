@@ -1,4 +1,4 @@
-export const FeedbackOptions = ({ options, onLeaveFeedBack }) => {
+export const FeedbackOptions = ({ options, onLeaveFeedBack, percentage }) => {
   return (
     <div>
       {options.map(option => (

@@ -8,9 +8,14 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  totalFeedback = () => {
+  countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
     return good + neutral + bad;
+  };
+  countPositiveFeedbackPercentage = () => {
+    const total = this.countTotalFeedback();
+    const { good } = this.state;
+    return good / total;
   };
   handleClick = type => {
     this.setState(prevState => ({
@@ -19,8 +24,8 @@ export class App extends Component {
     }));
   };
   render() {
-    const { good, neutral, bad } = this.state;
-    const total = this.totalFeedback();
+    const { good, neutral, bad, percentage } = this.state;
+    const total = this.countTotalFeedback();
     const options = ['good', 'neutral', 'bad'];
     return (
       <>
@@ -32,7 +37,13 @@ export class App extends Component {
         </Section>
 
         <Section title="Statistics">
-          <Statistics good={good} neutral={neutral} bad={bad} total={total} />
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            percentage={percentage}
+          />
         </Section>
       </>
     );
